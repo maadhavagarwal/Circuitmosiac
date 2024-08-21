@@ -52,7 +52,7 @@ function Info() {
             const newRemainingBudget = team.remainingBudget - team.currentExpense;
             const updatedExpenses =
               newRemainingBudget >= 0
-                ? [...team.expenses, team.currentExpense] // Record expense if deduction is successful
+                ? [...team.expenses, { amount: team.currentExpense, type: "Deducted" }] // Record expense with type
                 : team.expenses;
             return {
               ...team,
@@ -71,6 +71,32 @@ function Info() {
     }
   };
 
+  // Handle adding expenses to the remaining budget only if the correct PIN is provided
+  const handleAddExpense = (id) => {
+    const enteredPin = prompt("Enter the PIN:");
+    if (enteredPin === "120277") {
+      setTeams((prevTeams) =>
+        prevTeams.map((team) => {
+          if (team.id === id) {
+            const updatedRemainingBudget = team.remainingBudget + team.currentExpense; // Add the expense to remaining budget
+            const updatedExpenses = [...team.expenses, { amount: team.currentExpense, type: "Added" }]; // Record the expense with type "Added"
+
+            return {
+              ...team,
+              remainingBudget: updatedRemainingBudget, // Update remaining budget
+              currentExpense: 0, // Reset expense input after adding
+              expenses: updatedExpenses,
+            };
+          }
+          return team;
+        })
+      );
+      alert("Money added successfully to the remaining budget.");
+    } else {
+      alert("Incorrect PIN. Expense not added.");
+    }
+  };
+
   // Handle showing expenses
   const handleViewExpenses = (id) => {
     const team = teams.find((team) => team.id === id);
@@ -86,7 +112,7 @@ function Info() {
 
   return (
     <div>
-      <h1>Welcome to ciruit mosaic</h1>
+      <h1>Welcome to Circuit Mosaic</h1>
       <ul className="team-list">
         {teams.map((team) => (
           <li key={team.id}>
@@ -99,6 +125,9 @@ function Info() {
             />
             <Button variant="primary" onClick={() => handleDeduct(team.id)}>
               Deduct
+            </Button>
+            <Button variant="success" onClick={() => handleAddExpense(team.id)}>
+              Add Expense
             </Button>
             <Button variant="info" onClick={() => handleViewExpenses(team.id)}>
               View Expense
@@ -116,7 +145,9 @@ function Info() {
           {selectedTeam && selectedTeam.expenses.length > 0 ? (
             <ul>
               {selectedTeam.expenses.map((expense, index) => (
-                <li key={index}>Expense {index + 1}: {expense}</li>
+                <li key={index}>
+                  Expense {index + 1}: {expense.amount} ({expense.type})
+                </li>
               ))}
             </ul>
           ) : (

@@ -1,182 +1,122 @@
 [
     {
-        "id": "301",
+        "id": "341",
         "name": "team 1",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "407",
+        "id": "447",
         "name": "team 2",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "512",
+        "id": "552",
         "name": "team 3",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "629",
+        "id": "679",
         "name": "team 4",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "738",
+        "id": "739",
         "name": "team 5",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "842",
+        "id": "892",
         "name": "team 6",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "956",
+        "id": "976",
         "name": "team 7",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "164",
+        "id": "464",
         "name": "team 8",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "279",
+        "id": "679",
         "name": "team 9",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "385",
+        "id": "395",
         "name": "team 10",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "492",
+        "id": "792",
         "name": "team 11",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "598",
+        "id": "998",
         "name": "team 12",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "707",
+        "id": "907",
         "name": "team 13",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "814",
+        "id": "914",
         "name": "team 14",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "920",
+        "id": "120",
         "name": "team 15",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "136",
+        "id": "536",
         "name": "team 16",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "244",
+        "id": "544",
         "name": "team 17",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "355",
+        "id": "955",
         "name": "team 18",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "468",
+        "id": "478",
         "name": "team 19",
         "budget": 1000,
         "expense": 0
     },
     {
-        "id": "577",
+        "id": "677",
         "name": "team 20",
         "budget": 1000,
         "expense": 0
-    },
-    {
-        "id": "689",
-        "name": "team 21",
-        "budget": 1000,
-        "expense": 0
-    },
-    {
-        "id": "794",
-        "name": "team 22",
-        "budget": 1000,
-        "expense": 0
-    },
-    {
-        "id": "905",
-        "name": "team 23",
-        "budget": 1000,
-        "expense": 0
-    },
-    {
-        "id": "112",
-        "name": "team 24",
-        "budget": 1000,
-        "expense": 0
-    },
-    {
-        "id": "227",
-        "name": "team 25",
-        "budget": 1000,
-        "expense": 0
-    },
-    {
-        "id": "335",
-        "name": "team 26",
-        "budget": 1000,
-        "expense": 0
-    },
-    {
-        "id": "450",
-        "name": "team 27",
-        "budget": 1000,
-        "expense": 0
-    },
-    {
-        "id": "567",
-        "name": "team 28",
-        "budget": 1000,
-        "expense": 0
-    },
-    {
-        "id": "678",
-        "name": "team 29",
-        "budget": 1000,
-        "expense": 0
-    },
-    {
-        "id": "789",
-        "name": "team 30",
-        "budget": 1000,
-        "expense": 0
     }
-]
+    ]
