@@ -44,8 +44,7 @@ function Info() {
 
   // Handle the deduction when the button is clicked
   const handleDeduct = (id) => {
-    const enteredId = prompt("Enter the team ID for verification:");
-    if (enteredId === id) {
+  
       setTeams((prevTeams) =>
         prevTeams.map((team) => {
           if (team.id === id) {
@@ -66,16 +65,12 @@ function Info() {
         })
       );
       alert("Amount deducted successfully.");
-    } else {
-      alert("ID mismatch. Amount not deducted.");
-    }
+    
   };
 
   // Handle adding expenses to the remaining budget only if the correct PIN is provided
   const handleAddExpense = (id) => {
-    const enteredPin = prompt("Enter the PIN:");
-    if (enteredPin === "120277") {
-      setTeams((prevTeams) =>
+    setTeams((prevTeams) =>
         prevTeams.map((team) => {
           if (team.id === id) {
             const updatedRemainingBudget = team.remainingBudget + team.currentExpense; // Add the expense to remaining budget
@@ -92,10 +87,8 @@ function Info() {
         })
       );
       alert("Money added successfully to the remaining budget.");
-    } else {
-      alert("Incorrect PIN. Expense not added.");
     }
-  };
+  
 
   // Handle showing expenses
   const handleViewExpenses = (id) => {
