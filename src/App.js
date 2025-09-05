@@ -12,14 +12,15 @@ function Info() {
       return JSON.parse(savedTeams).map((team) => ({
         ...team,
         currentExpense: 0,
-        expenses: Array.isArray(team.expenses) ? team.expenses : [], // Ensure expenses is an array
+        remainingBudget: team.remainingBudget ?? team.budget, // ✅ Fix: restore properly
+        expenses: Array.isArray(team.expenses) ? team.expenses : [],
       }));
     } else {
       return info.map((team) => ({
         ...team,
-        currentExpense: 0, // Add a field to track the entered expense
-        remainingBudget: team.budget, // Track the remaining budget
-        expenses: [], // Array to track each expense
+        currentExpense: 0,
+        remainingBudget: team.budget,
+        expenses: [],
       }));
     }
   });
@@ -42,53 +43,55 @@ function Info() {
     );
   };
 
-  // Handle the deduction when the button is clicked
+  // Handle deduct
   const handleDeduct = (id) => {
-  
-      setTeams((prevTeams) =>
-        prevTeams.map((team) => {
-          if (team.id === id) {
-            const newRemainingBudget = team.remainingBudget - team.currentExpense;
-            const updatedExpenses =
-              newRemainingBudget >= 0
-                ? [...team.expenses, { amount: team.currentExpense, type: "Deducted" }] // Record expense with type
-                : team.expenses;
-            return {
-              ...team,
-              remainingBudget:
-                newRemainingBudget >= 0 ? newRemainingBudget : team.remainingBudget, // Prevent negative budget
-              currentExpense: newRemainingBudget >= 0 ? 0 : team.currentExpense, // Reset expense input if deduction is successful
-              expenses: updatedExpenses,
-            };
+    setTeams((prevTeams) =>
+      prevTeams.map((team) => {
+        if (team.id === id) {
+          if (team.currentExpense <= 0) {
+            alert("Enter a valid amount to deduct.");
+            return team;
           }
-          return team;
-        })
-      );
-      alert("Amount deducted successfully.");
-    
+          const newRemainingBudget = team.remainingBudget - team.currentExpense;
+          if (newRemainingBudget < 0) {
+            alert("Not enough budget remaining!");
+            return team;
+          }
+          return {
+            ...team,
+            remainingBudget: newRemainingBudget,
+            currentExpense: 0,
+            expenses: [...team.expenses, { amount: team.currentExpense, type: "Deducted" }],
+          };
+        }
+        return team;
+      })
+    );
+    alert("Amount deducted successfully.");
   };
 
-  // Handle adding expenses to the remaining budget only if the correct PIN is provided
+  // Handle add expense
   const handleAddExpense = (id) => {
     setTeams((prevTeams) =>
-        prevTeams.map((team) => {
-          if (team.id === id) {
-            const updatedRemainingBudget = team.remainingBudget + team.currentExpense; // Add the expense to remaining budget
-            const updatedExpenses = [...team.expenses, { amount: team.currentExpense, type: "Added" }]; // Record the expense with type "Added"
-
-            return {
-              ...team,
-              remainingBudget: updatedRemainingBudget, // Update remaining budget
-              currentExpense: 0, // Reset expense input after adding
-              expenses: updatedExpenses,
-            };
+      prevTeams.map((team) => {
+        if (team.id === id) {
+          if (team.currentExpense <= 0) {
+            alert("Enter a valid amount to add.");
+            return team;
           }
-          return team;
-        })
-      );
-      alert("Money added successfully to the remaining budget.");
-    }
-  
+          const updatedRemainingBudget = team.remainingBudget + team.currentExpense;
+          return {
+            ...team,
+            remainingBudget: updatedRemainingBudget,
+            currentExpense: 0,
+            expenses: [...team.expenses, { amount: team.currentExpense, type: "Added" }],
+          };
+        }
+        return team;
+      })
+    );
+    alert("Money added successfully to the remaining budget.");
+  };
 
   // Handle showing expenses
   const handleViewExpenses = (id) => {
@@ -114,6 +117,7 @@ function Info() {
             <p>Remaining Budget: {team.remainingBudget}</p>
             <input
               type="number"
+              value={team.currentExpense}  // ✅ Controlled input
               onChange={(e) => handleExpenseChange(team.id, e.target.value)}
             />
             <Button variant="primary" onClick={() => handleDeduct(team.id)}>
@@ -153,14 +157,6 @@ function Info() {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
-  );
-}
-
-function App() {
-  return (
-    <div className="App">
-      <Info />
     </div>
   );
 }
