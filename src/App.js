@@ -4,7 +4,7 @@ import info from './info.json';
 import { Button, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Info() {
+function App() {
   // Load saved teams from localStorage or use the initial data from info.json  
   const [teams, setTeams] = useState(() => {
     const savedTeams = localStorage.getItem('teams');
